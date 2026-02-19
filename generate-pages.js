@@ -1,0 +1,1019 @@
+#!/usr/bin/env node
+
+const fs = require('fs');
+const path = require('path');
+
+// Supported languages
+const LANGUAGES = ['en', 'fr', 'es', 'de', 'pt', 'nl', 'ar', 'zh', 'hi', 'bn', 'id', 'ru'];
+
+// Load translations
+const translations = JSON.parse(
+  fs.readFileSync(path.join(__dirname, 'translations.json'), 'utf-8')
+);
+
+// HTML template function
+function generateHTML(lang) {
+  const t = translations;
+  const isRTL = lang === 'ar';
+  
+  return `<!DOCTYPE html>
+<html lang="${lang}"${isRTL ? ' dir="rtl"' : ''}>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Meta Tags -->
+    <title>${t.meta.title[lang]}</title>
+    <meta name="description" content="${t.meta.description[lang]}">
+    <meta name="author" content="Nymia">
+    <link rel="canonical" href="https://nymia.cyber-waffle.com/${lang}/">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://nymia.cyber-waffle.com/${lang}/">
+    <meta property="og:title" content="${t.meta.ogTitle[lang]}">
+    <meta property="og:description" content="${t.meta.ogDescription[lang]}">
+    <meta property="og:image" content="https://nymia.cyber-waffle.com/og-image.png">
+    <meta property="og:image:width" content="1024">
+    <meta property="og:image:height" content="500">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://nymia.cyber-waffle.com/${lang}/">
+    <meta property="twitter:title" content="${t.meta.ogTitle[lang]}">
+    <meta property="twitter:description" content="${t.meta.ogDescription[lang]}">
+    <meta property="twitter:image" content="https://nymia.cyber-waffle.com/og-image.png">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../favicon.png">
+    
+    <!-- hreflang tags for SEO -->
+    ${LANGUAGES.map(l => `<link rel="alternate" hreflang="${l}" href="https://nymia.cyber-waffle.com/${l}/" />`).join('\n    ')}
+    <link rel="alternate" hreflang="x-default" href="https://nymia.cyber-waffle.com/en/" />
+    
+    <!-- Schema.org markup -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Nymia",
+      "url": "https://nymia.cyber-waffle.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://nymia.cyber-waffle.com/icon.png",
+        "width": "512",
+        "height": "512"
+      },
+      "description": "Smart period protection change reminders to prevent toxic shock syndrome. Available on iOS & Android.",
+      "applicationCategory": "HealthApplication",
+      "foundingDate": "2026"
+    }
+    </script>
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "MobileApplication",
+      "name": "Nymia",
+      "operatingSystem": "iOS, Android",
+      "applicationCategory": "HealthApplication",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "EUR"
+      },
+      "description": "${t.meta.description[lang].replace(/"/g, '\\"')}"
+    }
+    </script>
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "${t.faq.q1[lang].replace(/"/g, '\\"')}",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "${t.faq.a1[lang].replace(/"/g, '\\"')}"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "${t.faq.q2[lang].replace(/"/g, '\\"')}",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "${t.faq.a2[lang].replace(/"/g, '\\"')}"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "${t.faq.q3[lang].replace(/"/g, '\\"')}",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "${t.faq.a3[lang].replace(/"/g, '\\"')}"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "${t.faq.q4[lang].replace(/"/g, '\\"')}",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "${t.faq.a4[lang].replace(/"/g, '\\"')}"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "${t.faq.q5[lang].replace(/"/g, '\\"')}",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "${t.faq.a5[lang].replace(/"/g, '\\"')}"
+          }
+        }
+      ]
+    }
+    </script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #E8AEBC;
+            --background: #FFFBFB;
+            --text: #4A4A4A;
+            --white: #FFFFFF;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1024px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        /* Header */
+        header {
+            padding: 24px 0;
+            text-align: center;
+        }
+        
+        .logo {
+            font-size: 32px;
+            font-weight: 600;
+            color: var(--primary);
+            letter-spacing: 2px;
+        }
+        
+        /* Language Selector */
+        .language-selector {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+        
+        .language-selector select {
+            padding: 8px 12px;
+            border: 2px solid var(--primary);
+            border-radius: 8px;
+            background: var(--white);
+            color: var(--text);
+            font-size: 14px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 80px 0 60px;
+        }
+        
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 24px;
+            line-height: 1.2;
+        }
+        
+        .hero .subtitle {
+            font-size: 22px;
+            color: var(--text);
+            opacity: 0.8;
+            margin-bottom: 48px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .hero-logo {
+            width: 120px;
+            height: 120px;
+            margin-bottom: 32px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            border-radius: 24px;
+        }
+        
+        /* Store Buttons */
+        .store-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+        
+        .store-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 32px;
+            background: var(--text);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 500;
+            transition: transform 0.2s, opacity 0.2s;
+        }
+        
+        .store-btn:hover {
+            transform: translateY(-2px);
+            opacity: 0.9;
+        }
+        
+        .store-btn svg {
+            width: 24px;
+            height: 24px;
+        }
+        
+        /* How it works */
+        .how-it-works {
+            padding: 60px 0;
+            background: linear-gradient(135deg, #fef5f7 0%, #ffeef3 100%);
+        }
+        
+        .how-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .how-it-works h2 {
+            font-size: 32px;
+            font-weight: 600;
+            margin-bottom: 32px;
+            color: var(--text);
+        }
+        
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 32px;
+            margin-bottom: 24px;
+        }
+        
+        .step {
+            background: var(--white);
+            padding: 24px;
+            border-radius: 16px;
+            border: 2px solid var(--primary);
+        }
+        
+        .step-number {
+            width: 48px;
+            height: 48px;
+            background: var(--primary);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0 auto 16px;
+        }
+        
+        .step h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text);
+        }
+        
+        .step p {
+            font-size: 15px;
+            line-height: 1.5;
+            color: var(--text);
+            opacity: 0.85;
+        }
+        
+        .health-note {
+            background: var(--white);
+            padding: 20px 24px;
+            border-radius: 12px;
+            border: 2px solid var(--primary);
+            font-size: 15px;
+            line-height: 1.6;
+            color: var(--text);
+            text-align: left;
+        }
+        
+        /* Benefits Grid */
+        .benefits {
+            padding: 80px 0;
+            background: var(--white);
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            font-weight: 600;
+            margin-bottom: 60px;
+            color: var(--text);
+        }
+        
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 48px;
+            margin-bottom: 40px;
+        }
+        
+        .benefit-card {
+            text-align: center;
+            padding: 32px 24px;
+        }
+        
+        .benefit-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 24px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .benefit-icon svg {
+            width: 36px;
+            height: 36px;
+            color: var(--white);
+        }
+        
+        .benefit-card h3 {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--text);
+        }
+        
+        .benefit-card p {
+            font-size: 16px;
+            line-height: 1.7;
+            opacity: 0.85;
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 80px 0;
+        }
+        
+        .features-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 32px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .feature-item {
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+        }
+        
+        .feature-check {
+            width: 28px;
+            height: 28px;
+            background: var(--primary);
+            border-radius: 50%;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-weight: bold;
+            margin-top: 4px;
+        }
+        
+        .feature-item p {
+            font-size: 17px;
+            line-height: 1.6;
+        }
+        
+        /* Privacy Section */
+        .privacy {
+            padding: 80px 0;
+            background: var(--white);
+            text-align: center;
+        }
+        
+        .privacy-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .privacy h2 {
+            font-size: 36px;
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+        
+        .privacy p {
+            font-size: 18px;
+            line-height: 1.8;
+            margin-bottom: 16px;
+            opacity: 0.9;
+        }
+        
+        .privacy-badge {
+            display: inline-flex;
+            align-items: center;
+            margin-top: 32px;
+            padding: 12px 24px;
+            background: var(--background);
+            border-radius: 24px;
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--text);
+        }
+        
+        .privacy-badge svg {
+            margin-right: 8px;
+        }
+        
+        /* FAQ Section */
+        .faq {
+            padding: 80px 0;
+        }
+        
+        .faq-list {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        
+        .faq-item {
+            background: var(--white);
+            border: 2px solid var(--primary);
+            border-radius: 12px;
+            padding: 24px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .faq-item:hover {
+            box-shadow: 0 4px 12px rgba(232, 174, 188, 0.2);
+        }
+        
+        .faq-item summary {
+            list-style: none;
+            font-size: 18px;
+            color: var(--text);
+            cursor: pointer;
+        }
+        
+        .faq-item summary::-webkit-details-marker {
+            display: none;
+        }
+        
+        .faq-item summary::after {
+            content: '+';
+            float: right;
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        .faq-item[open] summary::after {
+            content: '−';
+        }
+        
+        .faq-item p {
+            margin-top: 16px;
+            font-size: 16px;
+            line-height: 1.7;
+            color: var(--text);
+            opacity: 0.85;
+        }
+        
+        /* Discreet Mode Section */
+        .discreet-mode {
+            padding: 80px 0;
+            background: var(--background);
+        }
+        
+        .discreet-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        
+        .discreet-text h2 {
+            font-size: 36px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--text);
+        }
+        
+        .discreet-text > p {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 32px;
+            opacity: 0.85;
+        }
+        
+        .discreet-features {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+        
+        .discreet-features li {
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+        }
+        
+        .discreet-features svg {
+            width: 24px;
+            height: 24px;
+            color: var(--primary);
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        
+        .discreet-features span {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        
+        .discreet-demo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .notif-screenshot {
+            width: 100%;
+            max-width: 280px;
+            height: auto;
+            border-radius: 16px;
+            filter: drop-shadow(0 20px 60px rgba(0, 0, 0, 0.15));
+        }
+        
+        /* CTA Section */
+        .cta {
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .cta h2 {
+            font-size: 40px;
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+        
+        .cta p {
+            font-size: 20px;
+            margin-bottom: 40px;
+            opacity: 0.85;
+        }
+        
+        /* Footer */
+        footer {
+            padding: 40px 0;
+            text-align: center;
+            background: var(--white);
+            border-top: 1px solid rgba(74, 74, 74, 0.1);
+        }
+        
+        footer p {
+            font-size: 14px;
+            opacity: 0.7;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+            
+            .hero .subtitle {
+                font-size: 18px;
+            }
+            
+            .section-title {
+                font-size: 28px;
+            }
+            
+            .benefits-grid {
+                gap: 40px;
+            }
+            
+            .how-it-works h2 {
+                font-size: 26px;
+            }
+            
+            .steps {
+                grid-template-columns: 1fr;
+            }
+            
+            .discreet-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .discreet-text h2 {
+                font-size: 28px;
+            }
+            
+            .notif-screenshot {
+                max-width: 240px;
+            }
+            
+            .store-buttons {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .store-btn {
+                justify-content: center;
+            }
+            
+            .language-selector {
+                position: static;
+                text-align: center;
+                margin-bottom: 20px;
+            }
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .hero, .benefit-card, .feature-item {
+            animation: fadeIn 0.6s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Language Selector -->
+    <div class="language-selector">
+        <select id="language-select" onchange="changeLanguage(this.value)">
+            <option value="en"${lang === 'en' ? ' selected' : ''}>🇬🇧 English</option>
+            <option value="fr"${lang === 'fr' ? ' selected' : ''}>🇫🇷 Français</option>
+            <option value="es"${lang === 'es' ? ' selected' : ''}>🇪🇸 Español</option>
+            <option value="de"${lang === 'de' ? ' selected' : ''}>🇩🇪 Deutsch</option>
+            <option value="pt"${lang === 'pt' ? ' selected' : ''}>🇵🇹 Português</option>
+            <option value="nl"${lang === 'nl' ? ' selected' : ''}>🇳🇱 Nederlands</option>
+            <option value="ar"${lang === 'ar' ? ' selected' : ''}>🇸🇦 العربية</option>
+            <option value="zh"${lang === 'zh' ? ' selected' : ''}>🇨🇳 中文</option>
+            <option value="hi"${lang === 'hi' ? ' selected' : ''}>🇮🇳 हिन्दी</option>
+            <option value="bn"${lang === 'bn' ? ' selected' : ''}>🇧🇩 বাংলা</option>
+            <option value="id"${lang === 'id' ? ' selected' : ''}>🇮🇩 Bahasa Indonesia</option>
+            <option value="ru"${lang === 'ru' ? ' selected' : ''}>🇷🇺 Русский</option>
+        </select>
+    </div>
+    
+    <header>
+        <div class="container">
+            <div class="logo">NYMIA</div>
+        </div>
+    </header>
+    
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <img src="../icon.png" alt="Nymia - ${t.meta.title[lang]}" class="hero-logo">
+                <h1>${t.hero.heading[lang]}</h1>
+                <p class="subtitle">${t.hero.subtitle[lang]}</p>
+                
+                <div class="store-buttons">
+                    <a href="#" class="store-btn" aria-label="${t.hero.appStoreLabel[lang]}">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M18.71 19.5C17.88 20.74 17 21.95 15.66 21.97C14.32 22 13.89 21.18 12.37 21.18C10.84 21.18 10.37 21.95 9.1 22C7.79 22.05 6.8 20.68 5.96 19.47C4.25 17 2.94 12.45 4.7 9.39C5.57 7.87 7.13 6.91 8.82 6.88C10.1 6.86 11.32 7.75 12.11 7.75C12.89 7.75 14.37 6.68 15.92 6.84C16.57 6.87 18.39 7.1 19.56 8.82C19.47 8.88 17.39 10.1 17.41 12.63C17.44 15.65 20.06 16.66 20.09 16.67C20.06 16.74 19.67 18.11 18.71 19.5M13 3.5C13.73 2.67 14.94 2.04 15.94 2C16.07 3.17 15.6 4.35 14.9 5.19C14.21 6.04 13.07 6.7 11.95 6.61C11.8 5.46 12.36 4.26 13 3.5Z"/>
+                        </svg>
+                        App Store
+                    </a>
+                    <a href="#" class="store-btn" aria-label="${t.hero.playStoreLabel[lang]}">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.5,12.92 20.16,13.19L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/>
+                        </svg>
+                        Google Play
+                    </a>
+                </div>
+            </div>
+        </section>
+        
+        <!-- How it works -->
+        <section class="how-it-works">
+            <div class="container">
+                <div class="how-container">
+                    <h2>${t.howItWorks.title[lang]}</h2>
+                    
+                    <div class="steps">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <h3>${t.howItWorks.step1Title[lang]}</h3>
+                            <p>${t.howItWorks.step1Desc[lang]}</p>
+                        </div>
+                        
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <h3>${t.howItWorks.step2Title[lang]}</h3>
+                            <p>${t.howItWorks.step2Desc[lang]}</p>
+                        </div>
+                        
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <h3>${t.howItWorks.step3Title[lang]}</h3>
+                            <p>${t.howItWorks.step3Desc[lang]}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="health-note">
+                        ${t.howItWorks.healthNote[lang]}
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Discreet Mode Section -->
+        <section class="discreet-mode">
+            <div class="container">
+                <div class="discreet-content">
+                    <div class="discreet-text">
+                        <h2>${t.discreetMode.title[lang]}</h2>
+                        <p>${t.discreetMode.intro[lang]}</p>
+                        <ul class="discreet-features">
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                                    <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+                                </svg>
+                                <span><strong>${t.discreetMode.feature1Title[lang]}</strong> : ${t.discreetMode.feature1Desc[lang]}</span>
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
+                                    <line x1="12" y1="18" x2="12.01" y2="18"/>
+                                </svg>
+                                <span><strong>${t.discreetMode.feature2Title[lang]}</strong> : ${t.discreetMode.feature2Desc[lang]}</span>
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                                    <circle cx="12" cy="12" r="3"/>
+                                </svg>
+                                <span><strong>${t.discreetMode.feature3Title[lang]}</strong> : ${t.discreetMode.feature3Desc[lang]}</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="discreet-demo">
+                        <img src="../fake-notif.png" alt="${t.discreetMode.imgAlt[lang]}" class="notif-screenshot" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Benefits Section -->
+        <section class="benefits">
+            <div class="container">
+                <h2 class="section-title">${t.benefits.title[lang]}</h2>
+                
+                <div class="benefits-grid">
+                    <article class="benefit-card">
+                        <div class="benefit-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            </svg>
+                        </div>
+                        <h3>${t.benefits.benefit1Title[lang]}</h3>
+                        <p>${t.benefits.benefit1Desc[lang]}</p>
+                    </article>
+                    
+                    <article class="benefit-card">
+                        <div class="benefit-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"/>
+                                <polyline points="12 6 12 12 16 14"/>
+                            </svg>
+                        </div>
+                        <h3>${t.benefits.benefit2Title[lang]}</h3>
+                        <p>${t.benefits.benefit2Desc[lang]}</p>
+                    </article>
+                    
+                    <article class="benefit-card">
+                        <div class="benefit-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                            </svg>
+                        </div>
+                        <h3>${t.benefits.benefit3Title[lang]}</h3>
+                        <p>${t.benefits.benefit3Desc[lang]}</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Features Section -->
+        <section class="features">
+            <div class="container">
+                <h2 class="section-title">${t.features.title[lang]}</h2>
+                
+                <div class="features-list">
+                    <div class="feature-item">
+                        <div class="feature-check" aria-hidden="true">✓</div>
+                        <p>${t.features.feature1[lang]}</p>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <div class="feature-check" aria-hidden="true">✓</div>
+                        <p>${t.features.feature2[lang]}</p>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <div class="feature-check" aria-hidden="true">✓</div>
+                        <p>${t.features.feature3[lang]}</p>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <div class="feature-check" aria-hidden="true">✓</div>
+                        <p>${t.features.feature4[lang]}</p>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <div class="feature-check" aria-hidden="true">✓</div>
+                        <p>${t.features.feature5[lang]}</p>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <div class="feature-check" aria-hidden="true">✓</div>
+                        <p>${t.features.feature6[lang]}</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Privacy Section -->
+        <section class="privacy">
+            <div class="container">
+                <div class="privacy-content">
+                    <h2>${t.privacy.title[lang]}</h2>
+                    <p>${t.privacy.paragraph1[lang]}</p>
+                    <p>${t.privacy.paragraph2[lang]}</p>
+                    <span class="privacy-badge">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 16px; height: 16px;">
+                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                        </svg>
+                        ${t.privacy.badge[lang]}
+                    </span>
+                </div>
+            </div>
+        </section>
+        
+        <!-- FAQ Section -->
+        <section class="faq">
+            <div class="container">
+                <h2 class="section-title">${t.faq.title[lang]}</h2>
+                
+                <div class="faq-list">
+                    <details class="faq-item">
+                        <summary><strong>${t.faq.q1[lang]}</strong></summary>
+                        <p>${t.faq.a1[lang]}</p>
+                    </details>
+                    
+                    <details class="faq-item">
+                        <summary><strong>${t.faq.q2[lang]}</strong></summary>
+                        <p>${t.faq.a2[lang]}</p>
+                    </details>
+                    
+                    <details class="faq-item">
+                        <summary><strong>${t.faq.q3[lang]}</strong></summary>
+                        <p>${t.faq.a3[lang]}</p>
+                    </details>
+                    
+                    <details class="faq-item">
+                        <summary><strong>${t.faq.q4[lang]}</strong></summary>
+                        <p>${t.faq.a4[lang]}</p>
+                    </details>
+                    
+                    <details class="faq-item">
+                        <summary><strong>${t.faq.q5[lang]}</strong></summary>
+                        <p>${t.faq.a5[lang]}</p>
+                    </details>
+                </div>
+            </div>
+        </section>
+        
+        <!-- CTA Section -->
+        <section class="cta">
+            <div class="container">
+                <h2>${t.cta.title[lang]}</h2>
+                <p>${t.cta.subtitle[lang]}</p>
+                
+                <div class="store-buttons">
+                    <a href="https://apps.apple.com/fr/app/nymia-safe-period-protection/id6758914725" class="store-btn" aria-label="${t.hero.appStoreLabel[lang]}">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M18.71 19.5C17.88 20.74 17 21.95 15.66 21.97C14.32 22 13.89 21.18 12.37 21.18C10.84 21.18 10.37 21.95 9.1 22C7.79 22.05 6.8 20.68 5.96 19.47C4.25 17 2.94 12.45 4.7 9.39C5.57 7.87 7.13 6.91 8.82 6.88C10.1 6.86 11.32 7.75 12.11 7.75C12.89 7.75 14.37 6.68 15.92 6.84C16.57 6.87 18.39 7.1 19.56 8.82C19.47 8.88 17.39 10.1 17.41 12.63C17.44 15.65 20.06 16.66 20.09 16.67C20.06 16.74 19.67 18.11 18.71 19.5M13 3.5C13.73 2.67 14.94 2.04 15.94 2C16.07 3.17 15.6 4.35 14.9 5.19C14.21 6.04 13.07 6.7 11.95 6.61C11.8 5.46 12.36 4.26 13 3.5Z"/>
+                        </svg>
+                        App Store
+                    </a>
+                    <a href="" class="store-btn" aria-label="${t.hero.playStoreLabel[lang]}" style="opacity: 0.5; pointer-events: none;">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.5,12.92 20.16,13.19L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/>
+                        </svg>
+                        Google Play
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <p>${t.footer.copyright[lang]}</p>
+            <p style="margin-top: 8px; font-size: 13px;"><a href="https://privacy.nymia.cyber-waffle.com/" style="color: var(--primary); text-decoration: none;">Privacy Policy</a></p>
+        </div>
+    </footer>
+    
+    <script>
+        function changeLanguage(lang) {
+            const path = '/' + lang + '/';
+            window.location.href = path;
+        }
+    </script>
+</body>
+</html>`;
+}
+
+// Generate pages
+console.log('🚀 Generating static pages for all languages...\n');
+
+LANGUAGES.forEach(lang => {
+  const html = generateHTML(lang);
+  const dir = path.join(__dirname, lang);
+  
+  // Create directory if doesn't exist
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir, { recursive: true });
+  }
+  
+  // Write index.html
+  const filePath = path.join(dir, 'index.html');
+  fs.writeFileSync(filePath, html, 'utf-8');
+  
+  console.log(`✅ Generated: ${lang}/index.html`);
+});
+
+console.log('\n🎉 All pages generated successfully!');
+console.log('\n📂 Structure created:');
+console.log('   marketing/');
+console.log('   ├── index.html (language redirect)');
+LANGUAGES.forEach(lang => {
+  console.log(`   ├── ${lang}/`);
+  console.log(`   │   └── index.html`);
+});
