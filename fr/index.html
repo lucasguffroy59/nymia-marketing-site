@@ -672,6 +672,111 @@
             }
         }
         
+        /* Calendar Section */
+        .calendar {
+            padding: 80px 0;
+            background: var(--white);
+        }
+        
+        .calendar-intro {
+            text-align: center;
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto 48px;
+            opacity: 0.85;
+            line-height: 1.7;
+        }
+        
+        .calendar-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 28px;
+            max-width: 960px;
+            margin: 0 auto;
+        }
+        
+        .calendar-feature {
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+            background: var(--background);
+            padding: 24px;
+            border-radius: 16px;
+            border: 2px solid var(--primary);
+        }
+        
+        .calendar-feature .feature-check {
+            flex-shrink: 0;
+            margin-top: 0;
+        }
+        
+        .calendar-feature strong {
+            display: block;
+            font-size: 17px;
+            margin-bottom: 8px;
+            color: var(--text);
+        }
+        
+        .calendar-feature p {
+            font-size: 15px;
+            line-height: 1.6;
+            color: var(--text);
+            opacity: 0.85;
+            margin: 0;
+        }
+        
+        /* Health Library Section */
+        .health-library {
+            padding: 80px 0;
+        }
+        
+        .library-intro {
+            text-align: center;
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto 48px;
+            opacity: 0.85;
+            line-height: 1.7;
+        }
+        
+        .library-topics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 24px;
+            max-width: 900px;
+            margin: 0 auto 32px;
+        }
+        
+        .topic-card {
+            background: var(--white);
+            border: 2px solid var(--primary);
+            border-radius: 16px;
+            padding: 28px 24px;
+            text-align: center;
+        }
+        
+        .topic-icon {
+            font-size: 36px;
+            margin-bottom: 16px;
+        }
+        
+        .topic-card p {
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--text);
+            opacity: 0.85;
+            margin: 0;
+        }
+        
+        .library-offline {
+            text-align: center;
+            font-size: 14px;
+            opacity: 0.6;
+            font-style: italic;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
         /* Animations */
         @keyframes fadeIn {
             from {
@@ -720,7 +825,7 @@
             <div class="container">
                 <img src="../icon.png" alt="Nymia - Nymia - Rappels pour Changer vos Protections Périodiques | Évitez le Choc Toxique" class="hero-logo">
                 <h1>N'oubliez plus jamais de changer votre tampon, cup ou serviette</h1>
-                <p class="subtitle">Nymia vous rappelle au bon moment selon votre protection périodique (tampon, cup menstruelle, serviette hygiénique...) pour éviter le syndrome du choc toxique, les fuites et la charge mentale. <strong>En toute discrétion.</strong></p>
+                <p class="subtitle">Nymia vous rappelle au bon moment selon votre protection périodique (tampon, cup menstruelle, serviette...) pour éviter le syndrome du choc toxique, les fuites et la charge mentale. <strong>Simple, discret, conçu pour toutes.</strong></p>
                 
                 <div class="store-buttons">
                     <a href="https://apps.apple.com/app/nymia-safe-period-protection/id6758914725" class="store-btn" aria-label="Télécharger sur l'App Store">
@@ -767,6 +872,37 @@
                     
                     <div class="health-note">
                         <strong>Basé sur les recommandations médicales</strong><br>Les durées de port sont calculées selon les recommandations de santé pour prévenir le syndrome du choc toxique (SCT) et éviter les fuites. Par exemple : 4 heures recommandé, 6 heures maximum pour un tampon hygiénique.
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Calendar Section -->
+        <section class="calendar">
+            <div class="container">
+                <h2 class="section-title">Votre cycle, en un coup d'œil</h2>
+                <p class="calendar-intro">Au-delà des rappels, Nymia vous offre une vue claire sur votre cycle menstruel — passé, présent et futur.</p>
+                <div class="calendar-features">
+                    <div class="calendar-feature">
+                        <div class="feature-check" aria-hidden="true">✓</div>
+                        <div>
+                            <strong>Phases du cycle prédites</strong>
+                            <p>Vos règles, votre fenêtre fertile et votre ovulation sont visualisées directement sur le calendrier et recalculées automatiquement depuis vos dernières règles.</p>
+                        </div>
+                    </div>
+                    <div class="calendar-feature">
+                        <div class="feature-check" aria-hidden="true">✓</div>
+                        <div>
+                            <strong>Votre historique de port</strong>
+                            <p>Chaque jour est colorisé selon vos sessions enregistrées. Appuyez sur n'importe quel jour pour voir quelle protection vous avez portée et combien de temps.</p>
+                        </div>
+                    </div>
+                    <div class="calendar-feature">
+                        <div class="feature-check" aria-hidden="true">✓</div>
+                        <div>
+                            <strong>Mettez à jour votre cycle en un geste</strong>
+                            <p>Vos prochaines règles ont démarré plus tôt que prévu ? Appuyez simplement sur le jour dans le calendrier — toutes vos prévisions futures sont immédiatement recalculées.</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -859,7 +995,7 @@
                 <div class="features-list">
                     <div class="feature-item">
                         <div class="feature-check" aria-hidden="true">✓</div>
-                        <p><strong>Durées adaptées à chaque protection :</strong> tampon 6h max, cup 12h max, etc. Basé sur les recommandations santé</p>
+                        <p><strong>Durée de port calculée intelligemment :</strong> chaque type de protection dispose de son propre minuteur, calé sur les recommandations santé</p>
                     </div>
                     
                     <div class="feature-item">
@@ -886,7 +1022,40 @@
                         <div class="feature-check" aria-hidden="true">✓</div>
                         <p><strong>100% hors ligne</strong> - vos données ne quittent jamais votre téléphone</p>
                     </div>
+                    
+                    <div class="feature-item">
+                        <div class="feature-check" aria-hidden="true">✓</div>
+                        <p><strong>Agissez directement depuis la notification :</strong> snooze 15 min ou confirmez que vous venez de changer — sans même ouvrir l'appli</p>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <div class="feature-check" aria-hidden="true">✓</div>
+                        <p><strong>Accès rapide personnalisé :</strong> choisissez vos 3 protections favorites pour les lancer d'un geste depuis l'écran d'accueil</p>
+                    </div>
                 </div>
+            </div>
+        </section>
+        
+        <!-- Health Library Section -->
+        <section class="health-library">
+            <div class="container">
+                <h2 class="section-title">Une bibliothèque santé intégrée</h2>
+                <p class="library-intro">Nymia intègre une bibliothèque d'éducation santé complète, disponible hors ligne en 13 langues — sans connexion Internet.</p>
+                <div class="library-topics">
+                    <div class="topic-card">
+                        <div class="topic-icon">🩺</div>
+                        <p>Le SCT expliqué : définition, symptômes, comment le prévenir et idées reçues</p>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-icon">🌙</div>
+                        <p>Guides de protection pour chaque moment : la nuit, le sport, le travail, les voyages</p>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-icon">📖</div>
+                        <p>Phases du cycle, types de flux, douleurs, hygiène — un guide complet et rassurant</p>
+                    </div>
+                </div>
+                <p class="library-offline">Tout le contenu est embarqué dans l'appli. Aucune connexion Internet requise, disponible en 13 langues.</p>
             </div>
         </section>
         
@@ -955,7 +1124,7 @@
                         </svg>
                         App Store
                     </a>
-                    <a href="" class="store-btn" aria-label="Télécharger sur Google Play" style="opacity: 0.5; pointer-events: none;">
+                    <a href="https://play.google.com/store/apps/details?id=com.nymia.app" class="store-btn" aria-label="Télécharger sur Google Play">
                         <svg viewBox="0 0 24 24" fill="currentColor">
                             <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.5,12.92 20.16,13.19L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/>
                         </svg>

@@ -672,6 +672,111 @@
             }
         }
         
+        /* Calendar Section */
+        .calendar {
+            padding: 80px 0;
+            background: var(--white);
+        }
+        
+        .calendar-intro {
+            text-align: center;
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto 48px;
+            opacity: 0.85;
+            line-height: 1.7;
+        }
+        
+        .calendar-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 28px;
+            max-width: 960px;
+            margin: 0 auto;
+        }
+        
+        .calendar-feature {
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+            background: var(--background);
+            padding: 24px;
+            border-radius: 16px;
+            border: 2px solid var(--primary);
+        }
+        
+        .calendar-feature .feature-check {
+            flex-shrink: 0;
+            margin-top: 0;
+        }
+        
+        .calendar-feature strong {
+            display: block;
+            font-size: 17px;
+            margin-bottom: 8px;
+            color: var(--text);
+        }
+        
+        .calendar-feature p {
+            font-size: 15px;
+            line-height: 1.6;
+            color: var(--text);
+            opacity: 0.85;
+            margin: 0;
+        }
+        
+        /* Health Library Section */
+        .health-library {
+            padding: 80px 0;
+        }
+        
+        .library-intro {
+            text-align: center;
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto 48px;
+            opacity: 0.85;
+            line-height: 1.7;
+        }
+        
+        .library-topics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 24px;
+            max-width: 900px;
+            margin: 0 auto 32px;
+        }
+        
+        .topic-card {
+            background: var(--white);
+            border: 2px solid var(--primary);
+            border-radius: 16px;
+            padding: 28px 24px;
+            text-align: center;
+        }
+        
+        .topic-icon {
+            font-size: 36px;
+            margin-bottom: 16px;
+        }
+        
+        .topic-card p {
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--text);
+            opacity: 0.85;
+            margin: 0;
+        }
+        
+        .library-offline {
+            text-align: center;
+            font-size: 14px;
+            opacity: 0.6;
+            font-style: italic;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
         /* Animations */
         @keyframes fadeIn {
             from {
@@ -720,10 +825,10 @@
             <div class="container">
                 <img src="../icon.png" alt="Nymia - Nymia - मासिक धर्म सुरक्षा बदलने की याद दिलाना | विषाक्त सदमे से बचें" class="hero-logo">
                 <h1>अपने टैम्पोन, कप या पैड को बदलना कभी न भूलें</h1>
-                <p class="subtitle">Nymia आपके पीरियड प्रोटेक्शन (टैम्पोन, मेंस्ट्रुअल कप, पैड...) के आधार पर सही समय पर आपको याद दिलाता है ताकि टॉक्सिक शॉक सिंड्रोम, रिसाव और मानसिक बोझ से बचा जा सके। <strong>पूर्ण गोपनीयता में।</strong></p>
+                <p class="subtitle">Nymia आपके पीरियड प्रोटेक्शन (टैम्पोन, मेंस्ट्रुअल कप, पैड...) के आधार पर सही समय पर याद दिलाता है ताकि TSS, रिसाव और मानसिक बोझ से बचा जा सके। <strong>सरल, विवेकपूर्ण, हर महिला के लिए बनाया गया।</strong></p>
                 
                 <div class="store-buttons">
-                    <a href="https://apps.apple.com/in/app/nymia-safe-period-protection/id6758914725" class="store-btn" aria-label="App Store पर डाउनलोड करें">
+                    <a href="https://apps.apple.com/app/nymia-safe-period-protection/id6758914725" class="store-btn" aria-label="App Store पर डाउनलोड करें">
                         <svg viewBox="0 0 24 24" fill="currentColor">
                             <path d="M18.71 19.5C17.88 20.74 17 21.95 15.66 21.97C14.32 22 13.89 21.18 12.37 21.18C10.84 21.18 10.37 21.95 9.1 22C7.79 22.05 6.8 20.68 5.96 19.47C4.25 17 2.94 12.45 4.7 9.39C5.57 7.87 7.13 6.91 8.82 6.88C10.1 6.86 11.32 7.75 12.11 7.75C12.89 7.75 14.37 6.68 15.92 6.84C16.57 6.87 18.39 7.1 19.56 8.82C19.47 8.88 17.39 10.1 17.41 12.63C17.44 15.65 20.06 16.66 20.09 16.67C20.06 16.74 19.67 18.11 18.71 19.5M13 3.5C13.73 2.67 14.94 2.04 15.94 2C16.07 3.17 15.6 4.35 14.9 5.19C14.21 6.04 13.07 6.7 11.95 6.61C11.8 5.46 12.36 4.26 13 3.5Z"/>
                         </svg>
@@ -767,6 +872,37 @@
                     
                     <div class="health-note">
                         <strong>चिकित्सा सिफारिशों के आधार पर</strong><br>पहनने की अवधि स्वास्थ्य सिफारिशों के अनुसार गणना की जाती है ताकि टॉक्सिक शॉक सिंड्रोम (TSS) को रोका जा सके और रिसाव से बचा जा सके। उदाहरण के लिए: टैम्पोन के लिए 4 घंटे की सिफारिश, 6 घंटे अधिकतम।
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Calendar Section -->
+        <section class="calendar">
+            <div class="container">
+                <h2 class="section-title">आपका चक्र, एक नज़र में</h2>
+                <p class="calendar-intro">रिमाइंडर से परे, Nymia आपको आपके मासिक धर्म चक्र का स्पष्ट दृश्य देता है — पिछले, वर्तमान और भविष्य में।</p>
+                <div class="calendar-features">
+                    <div class="calendar-feature">
+                        <div class="feature-check" aria-hidden="true">✓</div>
+                        <div>
+                            <strong>भविष्यवाणी की गई चक्र चरण</strong>
+                            <p>आपकी माहवारी, उपजाऊ खिड़की और ओव्यूलेशन सीधे कैलेंडर पर दिखाए जाते हैं और आपकी अंतिम माहवारी के बाद से स्वचालित रूप से पुनर्गणना की जाती हैं।</p>
+                        </div>
+                    </div>
+                    <div class="calendar-feature">
+                        <div class="feature-check" aria-hidden="true">✓</div>
+                        <div>
+                            <strong>आपका पहनने का इतिहास</strong>
+                            <p>प्रत्येक दिन आपकी दर्ज की गई सत्रों के आधार पर रंगीन होता है। किसी भी दिन को टैप करें यह देखने के लिए कि आपने कौन सी सुरक्षा पहनी और कितने समय तक।</p>
+                        </div>
+                    </div>
+                    <div class="calendar-feature">
+                        <div class="feature-check" aria-hidden="true">✓</div>
+                        <div>
+                            <strong>एक टैप में अपना चक्र अपडेट करें</strong>
+                            <p>क्या आपकी अगली माहवारी उम्मीद से पहले शुरू हुई? बस कैलेंडर में दिन पर टैप करें — आपकी सभी भविष्य की भविष्यवाणियाँ तुरंत पुनर्गणना हो जाती हैं।</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -859,7 +995,7 @@
                 <div class="features-list">
                     <div class="feature-item">
                         <div class="feature-check" aria-hidden="true">✓</div>
-                        <p><strong>प्रत्येक सुरक्षा के अनुरूप अवधि:</strong> टैम्पोन 6 घंटे अधिकतम, कप 12 घंटे अधिकतम, आदि। स्वास्थ्य सिफारिशों पर आधारित</p>
+                        <p><strong>स्मार्ट वेयर ड्यूरेशन कैलकुलेशन:</strong> प्रत्येक प्रकार की सुरक्षा का अपना व्यक्तिगत टाइमर होता है, स्वास्थ्य सिफारिशों पर आधारित</p>
                     </div>
                     
                     <div class="feature-item">
@@ -886,7 +1022,40 @@
                         <div class="feature-check" aria-hidden="true">✓</div>
                         <p><strong>100% ऑफ़लाइन</strong> - आपका डेटा कभी आपके फोन से बाहर नहीं जाता</p>
                     </div>
+                    
+                    <div class="feature-item">
+                        <div class="feature-check" aria-hidden="true">✓</div>
+                        <p><strong>सीधे नोटिफिकेशन से कार्य करें:</strong> 15 मिनट स्नूज़ करें या पुष्टि करें कि आपने अभी बदला — ऐप खोले बिना</p>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <div class="feature-check" aria-hidden="true">✓</div>
+                        <p><strong>व्यक्तिगत त्वरित पहुंच:</strong> होम स्क्रीन से तुरंत एक-टैप लॉन्च के लिए अपनी 3 पसंदीदा सुरक्षा चुनें</p>
+                    </div>
                 </div>
+            </div>
+        </section>
+        
+        <!-- Health Library Section -->
+        <section class="health-library">
+            <div class="container">
+                <h2 class="section-title">स्वास्थ्य ज्ञान, सीधे अंतर्निहित</h2>
+                <p class="library-intro">Nymia में एक पूर्ण स्वास्थ्य शिक्षा पुस्तकालय शामिल है, 13 भाषाओं में ऑफलाइन उपलब्ध — किसी इंटरनेट कनेक्शन की आवश्यकता नहीं।</p>
+                <div class="library-topics">
+                    <div class="topic-card">
+                        <div class="topic-icon">🩺</div>
+                        <p>टॉक्सिक शॉक सिंड्रोम समझाया गया: यह क्या है, लक्षण, रोकथाम और सामान्य मिथक</p>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-icon">🌙</div>
+                        <p>हर पल के लिए संरक्षण गाइड: रात, खेल, काम, यात्रा</p>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-icon">📖</div>
+                        <p>चक्र चरण, प्रवाह के प्रकार, दर्द, स्वच्छता — एक संपूर्ण और आश्वस्त करने वाली मार्गदर्शिका</p>
+                    </div>
+                </div>
+                <p class="library-offline">सभी सामग्री ऐप में एम्बेड की गई है। किसी इंटरनेट कनेक्शन की आवश्यकता नहीं, 13 भाषाओं में उपलब्ध।</p>
             </div>
         </section>
         
@@ -949,13 +1118,13 @@
                 <p>हजारों लोगों में शामिल हों जिन्होंने Nymia को चुना है।</p>
                 
                 <div class="store-buttons">
-                    <a href="https://apps.apple.com/in/app/nymia-safe-period-protection/id6758914725" class="store-btn" aria-label="App Store पर डाउनलोड करें">
+                    <a href="https://apps.apple.com/app/nymia-safe-period-protection/id6758914725" class="store-btn" aria-label="App Store पर डाउनलोड करें">
                         <svg viewBox="0 0 24 24" fill="currentColor">
                             <path d="M18.71 19.5C17.88 20.74 17 21.95 15.66 21.97C14.32 22 13.89 21.18 12.37 21.18C10.84 21.18 10.37 21.95 9.1 22C7.79 22.05 6.8 20.68 5.96 19.47C4.25 17 2.94 12.45 4.7 9.39C5.57 7.87 7.13 6.91 8.82 6.88C10.1 6.86 11.32 7.75 12.11 7.75C12.89 7.75 14.37 6.68 15.92 6.84C16.57 6.87 18.39 7.1 19.56 8.82C19.47 8.88 17.39 10.1 17.41 12.63C17.44 15.65 20.06 16.66 20.09 16.67C20.06 16.74 19.67 18.11 18.71 19.5M13 3.5C13.73 2.67 14.94 2.04 15.94 2C16.07 3.17 15.6 4.35 14.9 5.19C14.21 6.04 13.07 6.7 11.95 6.61C11.8 5.46 12.36 4.26 13 3.5Z"/>
                         </svg>
                         App Store
                     </a>
-                    <a href="" class="store-btn" aria-label="Google Play पर डाउनलोड करें" style="opacity: 0.5; pointer-events: none;">
+                    <a href="https://play.google.com/store/apps/details?id=com.nymia.app" class="store-btn" aria-label="Google Play पर डाउनलोड करें">
                         <svg viewBox="0 0 24 24" fill="currentColor">
                             <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.5,12.92 20.16,13.19L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/>
                         </svg>

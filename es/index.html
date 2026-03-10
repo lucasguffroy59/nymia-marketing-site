@@ -672,6 +672,111 @@
             }
         }
         
+        /* Calendar Section */
+        .calendar {
+            padding: 80px 0;
+            background: var(--white);
+        }
+        
+        .calendar-intro {
+            text-align: center;
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto 48px;
+            opacity: 0.85;
+            line-height: 1.7;
+        }
+        
+        .calendar-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 28px;
+            max-width: 960px;
+            margin: 0 auto;
+        }
+        
+        .calendar-feature {
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+            background: var(--background);
+            padding: 24px;
+            border-radius: 16px;
+            border: 2px solid var(--primary);
+        }
+        
+        .calendar-feature .feature-check {
+            flex-shrink: 0;
+            margin-top: 0;
+        }
+        
+        .calendar-feature strong {
+            display: block;
+            font-size: 17px;
+            margin-bottom: 8px;
+            color: var(--text);
+        }
+        
+        .calendar-feature p {
+            font-size: 15px;
+            line-height: 1.6;
+            color: var(--text);
+            opacity: 0.85;
+            margin: 0;
+        }
+        
+        /* Health Library Section */
+        .health-library {
+            padding: 80px 0;
+        }
+        
+        .library-intro {
+            text-align: center;
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto 48px;
+            opacity: 0.85;
+            line-height: 1.7;
+        }
+        
+        .library-topics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 24px;
+            max-width: 900px;
+            margin: 0 auto 32px;
+        }
+        
+        .topic-card {
+            background: var(--white);
+            border: 2px solid var(--primary);
+            border-radius: 16px;
+            padding: 28px 24px;
+            text-align: center;
+        }
+        
+        .topic-icon {
+            font-size: 36px;
+            margin-bottom: 16px;
+        }
+        
+        .topic-card p {
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--text);
+            opacity: 0.85;
+            margin: 0;
+        }
+        
+        .library-offline {
+            text-align: center;
+            font-size: 14px;
+            opacity: 0.6;
+            font-style: italic;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
         /* Animations */
         @keyframes fadeIn {
             from {
@@ -720,10 +825,10 @@
             <div class="container">
                 <img src="../icon.png" alt="Nymia - Nymia - Recordatorios para Cambiar tus Protecciones Menstruales | Evita el Shock Tóxico" class="hero-logo">
                 <h1>Nunca más olvides cambiar tu tampón, copa o compresa</h1>
-                <p class="subtitle">Nymia te recuerda en el momento adecuado según tu protección menstrual (tampón, copa menstrual, compresa...) para evitar el síndrome de shock tóxico, las fugas y la carga mental. <strong>Con total discreción.</strong></p>
+                <p class="subtitle">Nymia te recuerda en el momento adecuado según tu protección menstrual (tampón, copa menstrual, compresa...) para evitar el síndrome de shock tóxico, las fugas y la carga mental. <strong>Simple, discreto, diseñado para todas.</strong></p>
                 
                 <div class="store-buttons">
-                    <a href="https://apps.apple.com/es/app/nymia-safe-period-protection/id6758914725" class="store-btn" aria-label="Descargar en App Store">
+                    <a href="https://apps.apple.com/app/nymia-safe-period-protection/id6758914725" class="store-btn" aria-label="Descargar en App Store">
                         <svg viewBox="0 0 24 24" fill="currentColor">
                             <path d="M18.71 19.5C17.88 20.74 17 21.95 15.66 21.97C14.32 22 13.89 21.18 12.37 21.18C10.84 21.18 10.37 21.95 9.1 22C7.79 22.05 6.8 20.68 5.96 19.47C4.25 17 2.94 12.45 4.7 9.39C5.57 7.87 7.13 6.91 8.82 6.88C10.1 6.86 11.32 7.75 12.11 7.75C12.89 7.75 14.37 6.68 15.92 6.84C16.57 6.87 18.39 7.1 19.56 8.82C19.47 8.88 17.39 10.1 17.41 12.63C17.44 15.65 20.06 16.66 20.09 16.67C20.06 16.74 19.67 18.11 18.71 19.5M13 3.5C13.73 2.67 14.94 2.04 15.94 2C16.07 3.17 15.6 4.35 14.9 5.19C14.21 6.04 13.07 6.7 11.95 6.61C11.8 5.46 12.36 4.26 13 3.5Z"/>
                         </svg>
@@ -767,6 +872,37 @@
                     
                     <div class="health-note">
                         <strong>Basado en recomendaciones médicas</strong><br>Las duraciones de uso se calculan según las recomendaciones de salud para prevenir el síndrome de shock tóxico (SST) y evitar fugas. Por ejemplo: 4 horas recomendadas, 6 horas máximo para un tampón.
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Calendar Section -->
+        <section class="calendar">
+            <div class="container">
+                <h2 class="section-title">Tu ciclo, de un vistazo</h2>
+                <p class="calendar-intro">Más allá de los recordatorios, Nymia te ofrece una visión clara de tu ciclo menstrual — pasado, presente y futuro.</p>
+                <div class="calendar-features">
+                    <div class="calendar-feature">
+                        <div class="feature-check" aria-hidden="true">✓</div>
+                        <div>
+                            <strong>Fases del ciclo predichas</strong>
+                            <p>Tu período, ventana fértil y ovulación se visualizan directamente en el calendario y se recalculan automáticamente desde tu último período.</p>
+                        </div>
+                    </div>
+                    <div class="calendar-feature">
+                        <div class="feature-check" aria-hidden="true">✓</div>
+                        <div>
+                            <strong>Tu historial de uso</strong>
+                            <p>Cada día está coloreado según tus sesiones registradas. Toca cualquier día para ver qué protección usaste y cuánto tiempo.</p>
+                        </div>
+                    </div>
+                    <div class="calendar-feature">
+                        <div class="feature-check" aria-hidden="true">✓</div>
+                        <div>
+                            <strong>Actualiza tu ciclo con un toque</strong>
+                            <p>¿Tu próximo período empezó antes de lo esperado? Solo toca el día en el calendario — todas tus predicciones futuras se recalculan al instante.</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -859,7 +995,7 @@
                 <div class="features-list">
                     <div class="feature-item">
                         <div class="feature-check" aria-hidden="true">✓</div>
-                        <p><strong>Duraciones adaptadas a cada protección:</strong> tampón 6h máx., copa 12h máx., etc. Basado en recomendaciones de salud</p>
+                        <p><strong>Cálculo inteligente de la duración de uso:</strong> cada tipo de protección tiene su propio temporizador personalizado, calibrado según las recomendaciones de salud</p>
                     </div>
                     
                     <div class="feature-item">
@@ -886,7 +1022,40 @@
                         <div class="feature-check" aria-hidden="true">✓</div>
                         <p><strong>100% sin conexión</strong> - tus datos nunca salen de tu teléfono</p>
                     </div>
+                    
+                    <div class="feature-item">
+                        <div class="feature-check" aria-hidden="true">✓</div>
+                        <p><strong>Actúa directamente desde la notificación:</strong> pospón 15 min o confirma que acabas de cambiar — sin abrir la app</p>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <div class="feature-check" aria-hidden="true">✓</div>
+                        <p><strong>Acceso rápido personalizado:</strong> elige tus 3 protecciones favoritas para un lanzamiento instantáneo con un toque desde la pantalla principal</p>
+                    </div>
                 </div>
+            </div>
+        </section>
+        
+        <!-- Health Library Section -->
+        <section class="health-library">
+            <div class="container">
+                <h2 class="section-title">Conocimiento de salud, integrado</h2>
+                <p class="library-intro">Nymia incluye una completa biblioteca de educación para la salud, disponible sin conexión en 13 idiomas.</p>
+                <div class="library-topics">
+                    <div class="topic-card">
+                        <div class="topic-icon">🩺</div>
+                        <p>Síndrome de shock tóxico explicado: qué es, síntomas, cómo prevenirlo y mitos comunes</p>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-icon">🌙</div>
+                        <p>Guías de protección para cada momento: noche, deporte, trabajo, viajes</p>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-icon">📖</div>
+                        <p>Fases del ciclo, tipos de flujo, dolor, higiene — una guía completa y tranquilizadora</p>
+                    </div>
+                </div>
+                <p class="library-offline">Todo el contenido está integrado en la app. Sin conexión a internet, disponible en 13 idiomas.</p>
             </div>
         </section>
         
@@ -955,7 +1124,7 @@
                         </svg>
                         App Store
                     </a>
-                    <a href="" class="store-btn" aria-label="Descargar en Google Play" style="opacity: 0.5; pointer-events: none;">
+                    <a href="https://play.google.com/store/apps/details?id=com.nymia.app" class="store-btn" aria-label="Descargar en Google Play">
                         <svg viewBox="0 0 24 24" fill="currentColor">
                             <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.5,12.92 20.16,13.19L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/>
                         </svg>
